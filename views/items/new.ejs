@@ -1,0 +1,62 @@
+<% include ../partials/header %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 ">
+        <div class="form-group">
+          <label class="control-label" for="item[image]">Image Url:</label>
+          <input type="text" class="form-control" id="new-item-image" name="item[image]" placeholder="Enter image URL">
+        </div>
+        <img class="img-responsive img-rounded" id="image-preview" src="" >
+        <div class=" img-preview">
+          <i id="image-icon" class="fa fa-picture-o fa-5x fa-border" aria-hidden="true"></i>
+        </div>
+
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label" for="item[name]">Item name:</label>
+          <input type="text" class="form-control" id="new-item-name" name="item[name]" placeholder="Enter item name">
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="item[category]">Item category:</label>
+          <input type="text" class="form-control" id="new-item-category" name="item[category]" placeholder="Enter item category">
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="item[price]">Item price:</label>
+          <input type="text" class="form-control" id="new-item-price" name="item[price]" placeholder="Enter item price">
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="item[description]">Item description:</label>
+          <textarea type="text" class="form-control" id="new-item-description" name="item[description]" placeholder="Enter item description"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active tabs"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+        <li role="presentation" class="tabs"><a href="#addinfo" aria-controls="additional info" role="tab" data-toggle="tab">Additional Info</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="description" class="tab-pane fade in active">
+          <h2>Detailed description</h2>
+          <div>
+            <label class="control-label" for="item[detailedDescription]">Item detailed description:</label>
+            <textarea type="text" class="form-control" id="new-item-detailedDescription" name="item[detailedDescription]" placeholder="Enter item description"></textarea>
+          </div>
+        </div>
+        <div id="addinfo" class="tab-pane fade">
+          <h2>Additional Information</h2>
+          <div class="form-inline">
+            <label class="control-label" for="item[additionalInfo.info]">Info:</label>
+            <input type="text" class="form-control" id="new-item-info" name="item[additionalInfo.info]" placeholder="Enter item description">
+            <label class="control-label" for="item[additionalInfo.content]">Content:</label>
+            <input type="text" class="form-control" id="new-item-content" name="item[additionalInfo.content]" placeholder="Enter item description">
+            <a id="new-item-info-add" class="btn btn-xs btn-primary" href="#">Add info</a>
+          </div>
+          <table id="new-item-infos" class="table">
+          </table>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/js/script.js"></script>
+    <% include ../partials/footer %>

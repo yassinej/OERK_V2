@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<title>OERK - Outdoor Equipment Rental Kokkola</title>
+			<!-- Latest compiled and minified CSS -->
+			<link rel="stylesheet" href="/stylesheets/bootstrap.css">
+
+			<!-- jQuery library -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+			<!-- Latest compiled JavaScript -->
+			<script src="/js/bootstrap.js"></script>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+			<link rel="stylesheet" href="/stylesheets/main.css">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+		</head>
+		<body>
+				<nav class="navbar navbar-inverse">
+					<div class="container-fluid">
+				    <div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+				      <a class="navbar-brand" id="nav-brand" href="/">OERK</a>
+				    </div>
+						<div id="navbar" class="collapse navbar-collapse">
+					    <ul class="nav navbar-nav active">
+								<li><a id="nav-home" class="" href="/">Home</a></li>
+		 					 	<li><a id="nav-items" href="/items">Pack your gear</a></li>
+		 					 	<li><a id="nav-about" href="/about">About Us</a></li>
+		 					 	<li><a id="nav-contact" href="/contact">Contact Us</a></li>
+								<% if( currentUser && currentUser.isAdmin){ %>
+										<li><a id="nav-admin" href="/admin">Admin</a></li>
+								<% } %>
+					    </ul>
+					    <ul class="nav navbar-nav navbar-right">
+					       <% if(!currentUser){ %>
+		                        <li><a id="nav-login" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		                        <li><a id="nav-register" href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+		                    <% } else { %>
+		                        <li><a id="nav-loggedin" href="#">Signed In As <%= currentUser.username %></a></li>
+		                        <li><a id="nav-logout" href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+		                    <% } %>
+					    </ul>
+						</div>
+					</div>
+				</nav>
+
+				<div class="container">
+
+			        <% if(error && error.length > 0){ %>
+			            <div class="alert alert-danger" role="alert">
+			                <%= error %>
+			            </div>
+			        <% } %>
+			        <% if(success && success.length > 0){ %>
+			            <div class="alert alert-success" role="alert">
+			                <%= success %>
+			            </div>
+			        <% } %>
+			    </div>

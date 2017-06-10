@@ -1,0 +1,70 @@
+<% include ../partials/header %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img class="img-responsive img-rounded" src="<%= item.image %>">
+      </div>
+      <div class="col-md-6">
+        <div>
+          <h1 id="item-name" class=""><a><%=item.name%></a></h1>
+          <h2 id="item-price" class=""><%= item.price %>€/night</h2>
+
+          <p id="item-desc" class="item-desc">
+            <%= item.description %>
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active tabs"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+        <li role="presentation" class="tabs"><a href="#addinfo" aria-controls="additional info" role="tab" data-toggle="tab">Additional Info</a></li>
+        <li role="presentation" class="tabs"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="description" class="tab-pane fade in active">
+          <h2>Detailed description</h2>
+          <p><%=item.detailedDescription%></p>
+        </div>
+        <div id="addinfo" class="tab-pane fade">
+          <h2>Additional Information</h2>
+
+          <table class="table">
+            <% item.additionalInfo.forEach(function(info){ %>
+              <tr>
+                <th width="%" class=""><%=info.info%></th>
+                <td><%=info.content%></td>
+              </tr>
+            <% }) %>
+          </table>
+        </div>
+        <div id="reviews" class="tab-pane fade">
+          <div class="text-right">
+            <a id="comment-add" class="btn btn-primary" href="/items/<%= item._id %>/comments/new">Add New Comment</a>
+          </div>
+          <% item.comments.forEach(function(comment){ %>
+            <div class="row">
+              <div class="col-md-12">
+                <strong><%= comment.author.username %></strong>
+                <span class="pull-right">10 days ago</span>
+                <p>
+                  <%= comment.text %>
+                </p>
+                <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                  <form id="comment-del" class="delButton" method="POST" action="/items/<%=item._id%>/comments/<%=comment._id%>?_method=DELETE">
+                    <a id="comment-edit" href="/items/<%=item._id%>/comments/<%=comment._id%>/edit" class="btn btn-xs btn-warning">Edit comment</a>
+                    <button class="btn btn-xs btn-danger" type="submit">Delete comment</button>
+                  </form>
+                  <% } %>
+
+                  <hr>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+      </div>
+    </div>
+
+
+    <% include ../partials/footer %>

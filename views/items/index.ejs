@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+
+ <div class="container">
+     <header class="row">
+
+             <h1>Let's Pack your gear!</h1>
+             <hr>
+             <p>Check our outdoor equipment selection</p>
+
+     </header>
+
+     <div id ="item-list" class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% items.forEach(function(item){ %>
+            <div class="col-md-4 col-sm-6">
+                <div class="thumbnail">
+                <a href="/items/<%= item._id %>" class="">
+                  <img class="img-rounded" src="<%= item.image %>">
+                  <div class="caption">
+                   <h4><%= item.name %><span class="pull-right"><%= item.price %>€/day</span></h4>
+                  </div>
+                </a>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+<script type="text/javascript" src="/js/script.js"></script>
+<% include ../partials/footer %>

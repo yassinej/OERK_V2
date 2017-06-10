@@ -1,0 +1,4 @@
+Foxy: #E2591E
+Dark brown: #371714
+Brown: #A33A1A
+Light grey: #CAE2D2
