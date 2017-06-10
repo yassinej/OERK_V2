@@ -64,6 +64,7 @@ app.use("/items/:id/comments", commentRoutes);
 /*console.log("routes2");*/
 
 //process.env.PORT, process.env.IP instead of 3000 for c9
-app.listen(3000, function () {
+var port_number = server.listen(process.env.PORT || 3000);
+app.listen(port_number, function () {
     console.log("OERK is running!");
 });
