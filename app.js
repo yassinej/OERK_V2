@@ -53,7 +53,7 @@ app.use(function(req, res, next){
 });
 
 /*console.log("passport");*/
-seedDB(); //seed the database
+//seedDB(); //seed the database
 /*console.log("seed");*/
 
 app.use("/", indexRoutes);
