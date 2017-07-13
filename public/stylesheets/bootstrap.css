@@ -99,6 +99,7 @@ hr {
   -webkit-box-sizing: content-box;
      -moz-box-sizing: content-box;
           box-sizing: content-box;
+  border-top: 2px solid #33E6B1;
 }
 pre {
   overflow: auto;
@@ -1149,7 +1150,7 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid #eee;
+  border-top: 2px solid #33E6B1;
 }
 .sr-only {
   position: absolute;

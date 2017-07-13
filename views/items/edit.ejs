@@ -1,0 +1,103 @@
+<% include ../partials/header %>
+  <div class="container">
+    <header class="row">
+      <div class="col-md-6 ">
+        <h1>Edit Item in DB</h1>
+        <p>Check all fields for a better User Experience.</p>
+        <hr>
+      </div>
+    </header>
+    <form class="" action="index.html" method="post">
+      <div class="row">
+        <div class="col-md-6 ">
+          <div class="form-group">
+            <label class="control-label" for="item[image]">Image Url:</label>
+            <input type="text" class="form-control" id="edit-item-image" name="item[image]" value="<%=item.image%>">
+          </div>
+          <img class="img-responsive img-rounded" id="image-preview" src="<%=item.image%>">
+          <%# <div class=" img-preview">
+          <i id="image-icon" class="fa fa-picture-o fa-5x fa-border" aria-hidden="true"></i>
+        </div>%>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="control-label" for="item[name]">Item name:</label>
+            <input type="text" class="form-control" id="edit-item-name" name="item[name]" value="<%=item.name%>">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="item[category]">Item category:</label>
+            <input type="text" class="form-control" id="edit-item-category" name="item[category]" value="<%=item.category%>">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="item[price]">Item price:</label>
+            <input type="text" class="form-control" id="edit-item-price" name="item[price]" value="<%=item.price%>">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="item[description]">Item description:</label>
+            <textarea type="text" class="form-control" id="edit-item-description" name="item[description]" value=""><%=item.description%></textarea>
+          </div>
+          <a id="edit-item-submit" class="btn btn-block btn-warning" href="#">EDIT ITEM</a>
+        </div>
+      </div>
+      <div class="row">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active tabs"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+          <li role="presentation" class="tabs"><a href="#addinfo" aria-controls="additional info" role="tab" data-toggle="tab">Additional Info</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="description" class="tab-pane fade in active">
+            <h2>Detailed description</h2>
+            <div>
+              <label class="control-label" for="item[detailedDescription]">Item detailed description:</label>
+              <textarea type="text" class="form-control" id="edit-item-detailedDescription" name="item[detailedDescription]" value=""><%=item.detailedDescription%></textarea>
+            </div>
+          </div>
+          <div id="addinfo" class="tab-pane fade">
+            <h2>Additional Information</h2>
+            <table id="edit-item-infos" class="table">
+              <% item.additionalInfo.forEach(function(info){ %>
+                <tr>
+                  <td><a class="btn btn-xs btn-danger" href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <th width="%" class=""><input type="text" name="" value="<%=info.info%>"></th>
+                  <td><input type="text" name="" value="<%=info.content%>"></td>
+                </tr>
+                <% }) %>
+            </table>
+            <a id="edit-item-add-info" class="btn btn-xs btn-warning" href="#"><i class="fa fa-plus" aria-hidden="true"></i>Add Info</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script type="text/javascript">
+    var url = document.getElementById('edit-item-image');
+    var add = document.getElementById('edit-item-add-info')
+    var del = document.querySelectorAll("td a");
+    //handling url
+    url.addEventListener('change', function(e) {
+      if (this.value !== "") {
+        $("img[id='image-preview']").prop({
+          src: this.value
+        });
+        $("i[id='image-icon']").hide();
+      } else {
+        $("img[id='image-preview']").prop({
+          src: ""
+        });
+        $("i[id='image-icon']").show();
+      }
+    });
+    //handling del button
+    for (var i = 0; i < del.length; i++) {
+        del[i].addEventListener("click", function() {
+        console.log("clicked");
+        $(this).closest('tr').remove();
+    });
+  }
+  //handling add button
+  add.addEventListener('click', function(e) {
+    $('.table').insertRow();
+    
+  });
+  </script>
+  <% include ../partials/footer %>

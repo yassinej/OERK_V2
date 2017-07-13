@@ -1,12 +1,18 @@
 <% include ../partials/header %>
   <div class="container">
+    <header class="row">
+
+      <h1>Add Item to DB</h1>
+      <p>Fill all fields for a better User Experience.</p>
+      <hr>
+    </header>
     <div class="row">
       <div class="col-md-6 ">
         <div class="form-group">
           <label class="control-label" for="item[image]">Image Url:</label>
           <input type="text" class="form-control" id="new-item-image" name="item[image]" placeholder="Enter image URL">
         </div>
-        <img class="img-responsive img-rounded" id="image-preview" src="" >
+        <img class="img-responsive img-rounded" id="image-preview" src="">
         <div class=" img-preview">
           <i id="image-icon" class="fa fa-picture-o fa-5x fa-border" aria-hidden="true"></i>
         </div>
@@ -29,6 +35,7 @@
           <label class="control-label" for="item[description]">Item description:</label>
           <textarea type="text" class="form-control" id="new-item-description" name="item[description]" placeholder="Enter item description"></textarea>
         </div>
+        <a id="new-item-submit" class="btn btn-block btn-primary" href="#">Submit Item</a>
       </div>
     </div>
     <div class="row">
@@ -47,16 +54,53 @@
         <div id="addinfo" class="tab-pane fade">
           <h2>Additional Information</h2>
           <div class="form-inline">
-            <label class="control-label" for="item[additionalInfo.info]">Info:</label>
-            <input type="text" class="form-control" id="new-item-info" name="item[additionalInfo.info]" placeholder="Enter item description">
-            <label class="control-label" for="item[additionalInfo.content]">Content:</label>
-            <input type="text" class="form-control" id="new-item-content" name="item[additionalInfo.content]" placeholder="Enter item description">
-            <a id="new-item-info-add" class="btn btn-xs btn-primary" href="#">Add info</a>
+            <a id="new-item-info-add" class="btn btn-xs btn-primary" href="#">Add row</a>
           </div>
           <table id="new-item-infos" class="table">
           </table>
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="/js/script.js"></script>
+    <script type="text/javascript">
+      //Displaying Image preview
+      var url = document.getElementById('new-item-image');
+      url.addEventListener('change', function(e) {
+        if (this.value !== "") {
+          $("img[id='image-preview']").prop({
+            src: this.value
+          });
+          $("i[id='image-icon']").hide();
+        } else {
+          $("img[id='image-preview']").prop({
+            src: ""
+          });
+          $("i[id='image-icon']").show();
+        }
+      });
+      var table = document.getElementById("new-item-infos");
+
+      //Adding Info row in table
+      var addItem = document.getElementById('new-item-info-add');
+      addItem.addEventListener('click', function(e) {
+
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        cell1.innerHTML = document.getElementById('new-item-info').value;
+        cell2.innerHTML = document.getElementById('new-item-content').value;
+        cell3.innerHTML = "<a class='del btn btn-xs btn-danger' href='#'>Del info</a>";
+      });
+
+      //Removing Info row in table
+      if ($("#new-item-infos tr").length > 0) {
+        var delItem = document.querySelectorAll(".del.btn.btn-xs.btn-danger");
+        delItem.addEventListener('click', function(e) {
+          console.log("btn clicked");
+          var i = this.parentNode.parentNode.rowIndex;
+          table.deleteRow(i);
+          console.log("row Deleted");
+        });
+      }
+    </script>
     <% include ../partials/footer %>

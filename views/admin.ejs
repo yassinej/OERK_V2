@@ -1,19 +1,69 @@
 <% include partials/header %>
 
-<div class="container">
+  <div class="container">
     <header class="row">
 
-            <h1>You got Secret Powers!</h1>
-            <hr>
-            <h3>Item Management</h3>
-            <a href="/items/new" class="btn btn-primary">New Item</a>
-            <a href="/items/edit" class="btn btn-warning">Edit Item</a>
-            <a href="/items/del" class="btn btn-danger">Delete Item</a>
-            
-            <h3>User Management</h3>
-            <a href="/users/new" class="btn btn-primary">New User</a>
-            <a href="/users/edit" class="btn btn-warning">Edit User</a>
-            <a href="/users/del" class="btn btn-danger">Delete User</a>
+      <h1>You got Secret Powers!</h1>
+      <hr>
+      <h3>Item Management</h3>
+      <a href="/items/new" class="btn btn-primary">New Item</a>
+
+      <form id="admin-item-del" class="" method="POST" action="/items/item._id?_method=DELETE">
+        <select class="input-sm item-input" id="admin-item-select" name="itemSelect">
+                <option value="">Choose Item</option>
+                <% items.forEach(function(item){ %>
+                  <option value="<%= item._id %>"><%= item.name %></option>
+                <% }); %>
+              </select>
+        <a href="#" class="btn btn-warning" id="admin-item-editbtn" disabled="true">Edit Item</a>
+        <a class="btn btn-danger" id="admin-item-delbtn" type="submit" disabled="true">Delete Item</a>
+      </form>
+
+
+      <h3>User Management</h3>
+      <a href="/users/new" class="btn btn-primary">New User</a>
+
+      <form id="admin-user-del "class="" method="POST" action="/users/user._id?_method=DELETE">
+        <select class="input-sm item-input" id="admin-user-select" name="userSelect">
+                <option value="">Choose User</option>
+                <% users.forEach(function(user){ %>
+                  <option value="<%= user._id %>"><%= user.username %></option>
+                <% }); %>
+              </select>
+        <a href="#" id="admin-user-editbtn" class="btn btn-warning" disabled="true">Edit User</a>
+        <a class="btn btn-danger" id="admin-user-delbtn" type="submit" disabled="true">Delete User</a>
+      </form>
     </header>
-</div>
-    <% include partials/footer %>
+  </div>
+  <script type="text/javascript">
+    var item = document.getElementById('admin-item-select');
+    var user = document.getElementById('admin-user-select');
+    var itemEdit = document.getElementById('admin-item-editbtn');
+    var itemForm = document.getElementById('admin-item-del');
+    var userEdit = document.getElementById('admin-user-editbtn');
+    var userForm = document.getElementById('admin-user-del');
+
+    item.addEventListener('change', function(e) {
+
+       if (this.value !== "") {
+        console.log("clicked");
+        itemEdit.disabled = false;
+        itemEdit.setAttribute("href", "/items/"+this.value+"/edit");
+        console.log("edit enabled");
+        itemForm.disabled = false;
+        itemForm.setAttribute("href", "/items/"+this.value+"?_method=DELETE");
+        console.log("del enabled");
+       }
+    });
+
+    user.addEventListener('select', function(e) {
+
+      if (this.value !== "") {
+        userEdit.disabled = false;
+        userEdit.setAttribute("href", "/users/"+this.value+"/edit");
+        userForm.disabled = false;
+        userForm.setAttribute("href", "/users/"+this.value+"?_method=DELETE");
+      }
+    });
+  </script>
+  <% include partials/footer %>

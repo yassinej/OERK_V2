@@ -27,11 +27,12 @@ router.post("", middleware.checkAdmin, function(req, res){
          console.log(err);
      } else {
          console.log(item);
-         req.flash("success", "Successfully added comment");
+         req.flash("success", "Successfully added item");
          res.redirect('/items/' + item._id);
      }
   });
 });
+
 
 //handling acces to one item
 router.get("/:id", function(req, res){
@@ -46,6 +47,14 @@ router.get("/:id", function(req, res){
         }
     });
 });
-
-
+//editing Item
+router.get("/:item_id/edit", middleware.checkAdmin, function(req, res){
+   Item.findById(req.params.item_id, function(err, foundItem){
+      if(err){
+          res.redirect("back");
+      } else {
+        res.render("items/edit", {item: foundItem});
+      }
+   });
+});
 module.exports = router;

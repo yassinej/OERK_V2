@@ -17,7 +17,7 @@ var express = require("express"),
 var url = process.env.DATABASEURL || "mongodb://localhost/oerk";
 mongoose.connect(url);
 /*console.log("DB");*/
-seedDB();
+//seedDB();
 // console.log("DB Seeded");
 //requiring routes
 var indexRoutes = require("./routes/index");
