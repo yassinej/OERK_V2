@@ -2,6 +2,9 @@
   "name": "oerk",
   "version": "1.0.0",
   "description": "Outdoor Equipment Rental Kokkola",
+  "engines": {
+    "node": "6.11.1"
+  },
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.17.2",
